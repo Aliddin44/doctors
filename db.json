@@ -1,0 +1,20 @@
+{
+  "doctors": [
+    {
+      "firstname": "salomat",
+      "lastname": "asadova",
+      "doc": "lor",
+      "time": "00:00",
+      "exp": 12,
+      "id": 1
+    },
+    {
+      "firstname": "nizom",
+      "lastname": "farhodov",
+      "doc": "nervropotolog",
+      "time": "20:00",
+      "exp": 2,
+      "id": 2
+    }
+  ]
+}
