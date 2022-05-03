@@ -9,11 +9,13 @@
     "db": "json-server --watch db.json"
   },
   "dependencies": {
+    "@vueup/vue-quill": "^1.0.0-beta.8",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vue2-editor": "^2.10.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -23,8 +25,10 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "node-sass": "^7.0.1",
     "sass": "^1.51.0",
-    "sass-loader": "^12.6.0"
+    "sass-loader": "^12.6.0",
+    "webpack": "^5.72.0"
   },
   "eslintConfig": {
     "root": true,

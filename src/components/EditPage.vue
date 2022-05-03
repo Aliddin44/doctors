@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <h1>YAngi shifokor qo'shish</h1>
+      <h1> shifokor malumotlarini tahrirlash</h1>
       <div class="modal" v-show="active">
           Malumot Qo'shildi 
       </div>
@@ -49,7 +49,7 @@
           <div class="col-lg-12">
                  <QuillEditor theme="snow" v-model:content="doctor.biog" />
           </div>
-          <button @click="add()">Jo'natish</button>
+          <button @click="save()">saqla</button>
       </div>
   </div>
 </template>
@@ -59,6 +59,7 @@ import axios from 'axios'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 export default {
+    props:['id'],
 data(){
     return{
         doctor:{},
@@ -71,26 +72,23 @@ QuillEditor
 
 },
 methods:{
-    add(){
-        axios.get(' http://localhost:3000/doctors?room='+this.doctor.room).then(res=>{
-            if(res.data.length>0){
-            this.roomMsg =true
-            }else{
-                axios.post('http://localhost:3000/doctors',this.doctor).then(
-                            res=> {
-                                console.log(res);
-                                this.active=true
-                                setTimeout(()=>{
-                                this.active=false
-                                },4000)
-                                this.doctor = {}
-                            }
-                        )
-            }
-        })
-       
-    }
+save(){
+    axios.put('http://localhost:3000/doctors/'+this.id,this.doctor).then(res=>{
+        if(res.status == 200){
+            this.$router.push('/list')
+        }
+
+    })
 }
+},
+created(){
+  axios.get('  http://localhost:3000/doctors/'+this.id).then(res=>{
+    this.doctor = res.data
+    console.log(res.data);
+  })
+}
+
+
 }
 </script>
 

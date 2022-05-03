@@ -17,6 +17,12 @@ const routes = [
         component:()=> import('@/view/NewDoctor.vue')
     },
     {
+        path:'/doctor/edit/:id',
+        name: 'EditPage',
+        component:()=> import('@/components/EditPage.vue'),
+        props:true
+    },
+    {
         path:'/doctor/:id',
         name: 'DoctorDetail',
         component:()=> import('@/components/doctorDetail.vue'),
