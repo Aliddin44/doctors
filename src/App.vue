@@ -4,6 +4,7 @@
    <router-link :to="{name:'Home'}"  active-class="active">Home</router-link>
   <router-link :to="{name:'List'}" active-class="active">List</router-link>
   <router-link :to="{name:'newDoctor'}" active-class="active">New Doctors</router-link>
+  <router-link :to="{name:'Setting'}" active-class="active">Sozlamalar</router-link>
  </div>
  </div>
  <router-view />

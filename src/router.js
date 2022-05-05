@@ -12,6 +12,18 @@ const routes = [
         component:()=> import('@/view/ListPage.vue')
     },
     {
+        path:'/setting',
+        name: 'Setting',
+        component:()=> import('@/view/SettingsPage.vue'),
+        children:[
+            {
+                path:'/setting/expert',
+                name:"Expert",
+                component:()=>import('@/components/ExpertPage.vue')
+            }
+        ]
+    },
+    {
         path:'/new-doctor',
         name: 'newDoctor',
         component:()=> import('@/view/NewDoctor.vue')

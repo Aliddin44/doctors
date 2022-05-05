@@ -16,9 +16,7 @@
           <div class="col-lg-6">
               <label for="">Mutaxasisligingiz</label>
               <select name="" id="" v-model="doctor.exp">
-                  <option value="xirurg">Xirurg</option>
-                  <option value="lor">Lor</option>
-                  <option value="nervopotolog">Nevropotolog</option>
+                 <option v-for="exp of experts" :key='exp.id' :value="exp.id">{{exp.title}}</option>
               </select>
           </div>
           <div class="col-lg-6">
@@ -46,9 +44,14 @@
                   <option value="Samarqand">Samarqand</option>
               </select>
           </div>
-          <div class="col-lg-12">
-                 <QuillEditor theme="snow" v-model:content="doctor.biog" />
-          </div>
+         
+            <div class="col-lg-12">
+                <quill-editor
+    v-model:value="doctor.bio"
+    
+  />
+            </div>
+          
           <button @click="add()">Jo'natish</button>
       </div>
   </div>
@@ -56,18 +59,26 @@
 
 <script>
 import axios from 'axios'
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
+
+
+import { quillEditor } from 'vue3-quill'
+
+
+
 export default {
 data(){
     return{
-        doctor:{},
+        doctor:{
+        },
         active:false,
-        roomMsg :false
+        roomMsg :false,
+        experts:[]
     }
 },
 components:{
-QuillEditor
+
+quillEditor
 
 },
 methods:{
@@ -75,6 +86,9 @@ methods:{
         axios.get(' http://localhost:3000/doctors?room='+this.doctor.room).then(res=>{
             if(res.data.length>0){
             this.roomMsg =true
+            setTimeout(()=>{
+                                this.roomMsg=false
+                                },3000)
             }else{
                 axios.post('http://localhost:3000/doctors',this.doctor).then(
                             res=> {
@@ -83,46 +97,24 @@ methods:{
                                 setTimeout(()=>{
                                 this.active=false
                                 },4000)
-                                this.doctor = {}
+                                this.doctor = {
+                                    
+                                }
                             }
                         )
             }
         })
        
     }
+},
+created(){
+    axios.get('http://localhost:3000/exps').then(res=>{
+        this.experts = res.data
+    })
 }
 }
 </script>
 
 <style>
-label{
-    width: 100%;
-    color: black;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: left;
-    margin-bottom: 10px;
-    display: block;
-}
-.col-lg-12{
-    width: 100%;
-    max-width: 100%;
-    flex-basis: 100%;
-    padding: 10px;
-}
-.modal{
-    position: fixed;
-    right: 30px;
-    top: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: #fff;
-    background-color: #2e2e;
-    border-radius: 8px;
-    font-size: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-weight: bold;
 
-}
 </style>

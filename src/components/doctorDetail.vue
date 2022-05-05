@@ -37,8 +37,8 @@
          </div>
          <div class="col-lg-12">
            <div class="titleA">Shifokor haqida malumot</div>
-           <div class="info">
-             {{doctor.biog.ops}}
+           <div class="info_bio" v-html="doctor.bio">
+            
            </div>
          </div>
         </div>

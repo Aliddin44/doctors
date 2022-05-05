@@ -16,9 +16,7 @@
           <div class="col-lg-6">
               <label for="">Mutaxasisligingiz</label>
               <select name="" id="" v-model="doctor.exp">
-                  <option value="xirurg">Xirurg</option>
-                  <option value="lor">Lor</option>
-                  <option value="nervopotolog">Nevropotolog</option>
+                 <option v-for="exp of experts" :key='exp.id' :value="exp.id">{{exp.title}}</option>
               </select>
           </div>
           <div class="col-lg-6">
@@ -47,7 +45,11 @@
               </select>
           </div>
           <div class="col-lg-12">
-                 <QuillEditor theme="snow" v-model:content="doctor.biog" />
+                 <quill-editor
+    v-model:value="doctor.bio"
+        
+    />
+            
           </div>
           <button @click="save()">saqla</button>
       </div>
@@ -56,19 +58,21 @@
 
 <script>
 import axios from 'axios'
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { quillEditor } from 'vue3-quill'
+
+
 export default {
     props:['id'],
 data(){
     return{
         doctor:{},
         active:false,
-        roomMsg :false
+        roomMsg :false,
+        experts:[]
     }
 },
 components:{
-QuillEditor
+quillEditor
 
 },
 methods:{
@@ -85,7 +89,11 @@ created(){
   axios.get('  http://localhost:3000/doctors/'+this.id).then(res=>{
     this.doctor = res.data
     console.log(res.data);
-  })
+  }),
+   axios.get('http://localhost:3000/exps').then(res=>{
+        this.experts = res.data
+        console.log(res.data);
+    })
 }
 
 
